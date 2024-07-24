@@ -3,7 +3,7 @@ import "./tw.css";
 
 export const metadata: Metadata = {
   title: "Taskverse",
-  description: "Collaborate with teammates in real time on a todo list",
+  description: "Collaborate with teammates in real time on a To-Do list",
 };
 
 export default function RootLayout({

@@ -15,7 +15,7 @@ const TodoList: React.FC<Props> = ({ userId }) => {
     <div className="min-h-screen bg-slate-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex items-center justify-center p-4">
       <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 w-full max-w-md">
         <h1 className="text-2xl font-bold text-slate-700 dark:text-gray-100 mb-4">
-          Todo List
+          To-Do List
         </h1>
         <TodoInput onAdd={addTodo} />
         <ul className="space-y-2">
