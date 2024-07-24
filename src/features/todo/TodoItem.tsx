@@ -40,17 +40,19 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggle, onDelete }) => {
           Delete
         </button>
       </div>
-      <div className="text-sm mt-2">
+      <div className="text-sm mt-2 text-gray-700 dark:text-gray-300">
         <p>
           Created by: <span className="font-semibold">{todo.createdBy}</span>
         </p>
-        {todo.createdAt && (
+        {todo.createdAt ? (
           <p>
             Created at:{" "}
             <span className="font-semibold">
               {formatDistanceToNow(new Date(todo.createdAt))} ago
             </span>
           </p>
+        ) : (
+          "Filler for created by"
         )}
         {todo.isDone && todo.markedBy && (
           <p>
