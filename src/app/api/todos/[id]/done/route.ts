@@ -26,7 +26,6 @@ export async function POST(request: Request, { params }: { params: { id: string 
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error marking todo as complete:', error);
     return NextResponse.json(
       { message: 'Internal server error', status: false },
       { status: 500 }

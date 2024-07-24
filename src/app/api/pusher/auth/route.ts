@@ -1,6 +1,5 @@
 import { pusherServer } from "@/lib/pusher";
 import { NextResponse } from 'next/server';
-import { UserChannelData } from 'pusher';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,7 +21,6 @@ const users = [
 
 
 export async function POST(request: Request) {
-  console.log("pusher is authing");
   try {
     const bodyText = await request.text();
     const params = new URLSearchParams(bodyText);
@@ -48,7 +46,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json(authResponse);
   } catch (error) {
-    console.error('Error in Pusher authorization:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

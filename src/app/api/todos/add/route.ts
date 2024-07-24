@@ -1,6 +1,6 @@
 import { PusherChannels, PusherEvents, pusherServer } from "@/lib/pusher";
 import { NextResponse } from "next/server";
-import { DraftTodo, Todo } from "@/lib/types";
+import { Todo } from "@/lib/types";
 import { addTodo } from "@/lib/store/todos";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -29,7 +29,6 @@ export async function POST(request: Request) {
     pusherServer.trigger(PusherChannels.TodoChannel, PusherEvents.Add, todo);
     return NextResponse.json({ status: "success" });
   } catch (error) {
-    console.error("Error in adding todo:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

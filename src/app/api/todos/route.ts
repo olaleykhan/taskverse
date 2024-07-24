@@ -10,7 +10,6 @@ export async function GET() {
     const todos = getTodos();
     return NextResponse.json(todos);
   } catch (error) {
-    console.error("Error fetching todos:", error);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

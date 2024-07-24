@@ -3,14 +3,14 @@
 import { useState } from "react";
 import TodoList from "@/features/todo/TodoList";
 import Auth from "@/features/auth/Auth";
-import Logout from "@/features/auth/Logout"; // Adjust the path based on your project structure
+import Logout from "@/features/auth/Logout";
 
 const Home = () => {
   const [userId, setUserId] = useState<string | undefined>(undefined);
 
   const handleLogout = () => {
-    setUserId(undefined); // Clear userId state
-    localStorage.removeItem("userId"); // Clear userId from localStorage
+    setUserId(undefined);
+    localStorage.removeItem("userId");
   };
 
   if (!userId) {
