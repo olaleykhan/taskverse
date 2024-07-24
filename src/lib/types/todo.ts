@@ -7,7 +7,7 @@ export interface Todo {
     markedBy?: string;
   }
   
-  export interface CreateTodo {
+  export interface DraftTodo {
     content: string;
     isDone: boolean;
     createdBy: string;
