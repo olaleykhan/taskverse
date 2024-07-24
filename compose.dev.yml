@@ -1,16 +1,16 @@
+version: '3.8'
+
 services:
   web:
-    container_name: test-conv
     build:
       context: .
-      dockerfile: dev.Dockerfile
+      target: ${DOCKER_BUILD_TARGET:-prod} # Default to prod if not set
     environment:
       NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_HOST}
-    env_file:
-      - .env.local
-    volumes:
-      - ./src:/app/src
-      - ./public:/app/public
-    restart: always
+      NODE_ENV: ${NODE_ENV:-production} # Default to production if not set
     ports:
       - 3000:3000
+    restart: always
+
+volumes:
+  node_modules:

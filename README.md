@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Unith-Imgur
 
-## Getting Started
+## live site: [https://taskverse-p2mw.onrender.com/](https://taskverse-p2mw.onrender.com/)
 
-First, run the development server:
+### live site: [https://converse.lekan.dev/](https://converse.lekan.dev/)
+
+## Overview
+
+Realtime To-Do is a collaborative to-do list application that allows multiple users to view, add, mark, and delete tasks in real-time using Pusher.
+
+## Project Structure
+
+## Project Summary
+
+- `src`: Main source code directory.
+- `public`: Contains public assets accessible by HTML
+- `src/app`: Next JS folder containing routes and pages
+- `src/__test__`: General test folders (You will find other tests closer to their component folders for easier accessibility)
+- `src/components`: General component files reusable accross multiple features/Routes
+- `src/lib`: Library directories that help with powering the app but are not related to NextJS
+- `src/theme`: Material UI related theming and global resets
+- `static`: Static assets like images and icons.
+- `features`: separates components by features. components and hooks should only be imported within the dame directory or to it's parent directory in src/app. (if a component is needed accross more than one feature then, it should be in src/components)
+- `hooks`: gotta love this one. this are reuseable react logics that are able to maintain state while reuseable accross multiple components.
+
+## Stack
+
+- [Next.js](https://nextjs.org/): React framework for building web applications with server-side rendering.
+- [React](https://reactjs.org/): JavaScript library for building user interfaces.
+- [TypeScript](https://www.typescriptlang.org/): Typed superset of JavaScript that compiles to plain JavaScript.
+- [MUI](https://mui.com/): React components for faster and easier web development.
+- [Vitest](https://vitest.dev/): Vite-native unit test framework.
+- [Pusher](pusher.com): Real-time communication service for WebSockets.
+- [Tailwind](.....)
+
+## Setting Up
+
+
+### Run Locally
+
+Clone the repository:
+
+```bash
+git clone https://github.com/olaleykhan/taskverse
+cd taskverse
+```
+install dependencies
+
+```bash
+npm install
+```
+
+run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Using Docker
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. [Install Docker](https://docs.docker.com/get-docker/) on your machine.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- To run development container: `docker compose -f compose.dev.yaml up --build`.
 
-## Learn More
+```bash
+docker compose -f compose.dev.yaml up --build
+```
 
-To learn more about Next.js, take a look at the following resources:
+- To Run your production build: `docker compose up --build`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker compose up --build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Environment Variables
+Make sure to set up your environment variables in a .env.local file. You can use the .env.example file as a template. Here are the variables you need to set:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+PUSHER_APP_ID=your-pusher-app-id
+PUSHER_KEY=your-pusher-key
+PUSHER_SECRET=your-pusher-secret
+PUSHER_CLUSTER=your-pusher-cluster
+
+
+Sign up at Pusher.com to get your Pusher credentials and fill them in.
