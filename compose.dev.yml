@@ -1,0 +1,16 @@
+services:
+  web:
+    container_name: test-conv
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    environment:
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_HOST}
+    env_file:
+      - .env.local
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    restart: always
+    ports:
+      - 3000:3000
