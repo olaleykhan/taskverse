@@ -1,6 +1,7 @@
 import { PusherChannels, PusherEvents, pusherServer } from "@/lib/pusher";
 import { NextResponse } from "next/server";
 import { DraftTodo, Todo } from "@/lib/types";
+import { addTodo } from "@/lib/store/todos";
 import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(request: Request) {
@@ -22,6 +23,7 @@ export async function POST(request: Request) {
       content:ct,
       createdAt: new Date().toISOString()
     };
+    addTodo(todo)
     pusherServer.trigger(PusherChannels.TodoChannel, PusherEvents.Add, todo);
     return NextResponse.json({ status: "success" });
   } catch (error) {

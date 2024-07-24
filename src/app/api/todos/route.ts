@@ -1,11 +1,13 @@
-import { pusherServer } from "@/lib/pusher";
-import { NextResponse } from 'next/server';
-import { TODOS } from "@/lib/constants/todo";
-import { v4 as uuidv4 } from 'uuid';
+// src/app/api/todos/route.ts
+import { NextResponse } from "next/server";
+import { getTodos } from "@/lib/store/todos";
 
-export const dynamic = 'force-dynamic';
-
-export async function GET(request: Request) {  
-    return NextResponse.json(TODOS);
+export async function GET() {
+  try {
+    const todos = getTodos();
+    return NextResponse.json(todos);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
 }
-

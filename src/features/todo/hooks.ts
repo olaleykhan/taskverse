@@ -1,41 +1,28 @@
 import { useEffect, useState } from 'react';
 import { DraftTodo, Todo } from '@/lib/types/todo';
-import { TODOS } from '@/lib/constants/todo';
 import { usePusher, PusherChannels, PusherEvents } from '@/lib/pusher';
 import { generateTemporaryId } from "@/lib/utils/id";
 
-export const useFetchTodos = () => {
+export const useTodoList = (userId: string) => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const pusherClient = usePusher({
+    userId,
+    channelName: PusherChannels.TodoChannel,
+  });
 
   useEffect(() => {
     const fetchTodos = async () => {
-      setLoading(true);
       try {
         const response = await fetch('/api/todos');
         const result: Todo[] = await response.json();
         setTodos(result);
       } catch (error) {
         console.error('Error fetching todos:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchTodos();
   }, []);
-
-  return { todos, setTodos, loading };
-};
-
-
-
-export const useTodoList = (userId: string) => {
-  const [todos, setTodos] = useState<Todo[]>(TODOS);
-  const pusherClient = usePusher({
-    userId,
-    channelName: PusherChannels.TodoChannel,
-  });
 
   useEffect(() => {
     if (pusherClient) {
@@ -77,13 +64,13 @@ export const useTodoList = (userId: string) => {
     }
   }, [pusherClient]);
 
-  const addTodo = (content: string) => {
+  const addTodo = async (content: string) => {
     const newTask: DraftTodo = {
       content,
       isDone: false,
       createdBy: userId,
     };
-    fetch("/api/todos/add", {
+    await fetch("/api/todos/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,10 +79,10 @@ export const useTodoList = (userId: string) => {
     });
   };
 
-  const toggleTodoDone = (id: string) => {
+  const toggleTodoDone = async (id: string) => {
     const todo = todos.find((todo) => todo.id === id);
     if (todo) {
-      fetch("/api/todos/mark", {
+      await fetch("/api/todos/mark", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,8 +92,8 @@ export const useTodoList = (userId: string) => {
     }
   };
 
-  const deleteTodo = (id: string) => {
-    fetch("/api/todos/delete", {
+  const deleteTodo = async (id: string) => {
+    await fetch("/api/todos/delete", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

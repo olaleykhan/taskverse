@@ -2,7 +2,7 @@ import type { Todo } from "@/lib/types";
 
 export const TODOS: Todo[] = [
     {
-        id: "hulla ballu",
+        id: "hulla ballu alimanadhs",
         content: "give out milt today",
         isDone: false,
         createdBy: "Lekan OG",
