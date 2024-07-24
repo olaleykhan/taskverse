@@ -1,5 +1,5 @@
-import Image from "next/image";
+import TodoList from "@/features/todo/TodoList";
 
 export default function Home() {
-  return <p className="text-3xl text-center underline"> Tailwind works</p>;
+  return <TodoList />;
 }
