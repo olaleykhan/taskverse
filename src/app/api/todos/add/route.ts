@@ -1,17 +1,28 @@
-import { pusherServer } from "@/lib/pusher";
+import { PusherChannels, PusherEvents, pusherServer } from "@/lib/pusher";
 import { NextResponse } from "next/server";
 import { DraftTodo, Todo } from "@/lib/types";
 import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(request: Request) {
   try {
-    const draft: DraftTodo = await request.json();
+    const { content, isDone, createdBy } = await request.json();
+    const ct = content.trim()
+
+    if (!ct) {
+      return NextResponse.json(
+        { message: 'Please provide the content for your todo item | it must not be empty', status: false },
+        { status: 400 }
+      );
+    }
+
     const todo: Todo = {
       id: uuidv4(),
-      ...draft,
+      isDone: isDone?? false,
+      createdBy: createdBy?? "John Doe",
+      content:ct,
       createdAt: new Date().toISOString()
     };
-    pusherServer.trigger("private-todo-channel", "add", todo);
+    pusherServer.trigger(PusherChannels.TodoChannel, PusherEvents.Add, todo);
     return NextResponse.json({ status: "success" });
   } catch (error) {
     console.error("Error in adding todo:", error);
