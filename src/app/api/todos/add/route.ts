@@ -6,10 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 export async function POST(request: Request) {
   try {
     const draft: DraftTodo = await request.json();
-    const todo = {
+    const todo: Todo = {
       id: uuidv4(),
-      ...draft
-    }
+      ...draft,
+      createdAt: new Date().toISOString()
+    };
     pusherServer.trigger("private-todo-channel", "add", todo);
     return NextResponse.json({ status: "success" });
   } catch (error) {

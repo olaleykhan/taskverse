@@ -5,7 +5,7 @@ export interface Todo {
     isDone: boolean;
     createdBy: string;
     markedBy?: string;
-  createdAt?: string;
+  createdAt: string;
   }
   
   export interface DraftTodo {
