@@ -4,6 +4,8 @@ import { DraftTodo, Todo } from "@/lib/types";
 import { addTodo } from "@/lib/store/todos";
 import { v4 as uuidv4 } from 'uuid';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   try {
     const { content, isDone, createdBy } = await request.json();
